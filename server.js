@@ -10,6 +10,10 @@ app.use(cors({
 }))
 app.use("/",router);
 
+app.get("/healthCheck",(req, res)=>{
+  res.status(200).json({message:"server working"})
+})
+
 connectDB().then(() =>{
   const PORT = process.env.PORT || 8000;
   app.on("error", (error) =>{
