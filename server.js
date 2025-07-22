@@ -1,28 +1,32 @@
+require("dotenv").config(); // Load .env variables
 const express = require("express");
-const {connectDB} = require("./config/db.config.js");
-const router = require("./routes/router.js");
-var cors = require('cors')
+const cors = require("cors");
+const { connectDB } = require("./config/db.config");
+const router = require("./routes/router");
 
 const app = express();
+
+// Middlewares
 app.use(express.json());
-app.use(cors({
- origin : "*"
-}))
-app.use("/",router);
+app.use(cors());
 
-app.get("/healthCheck",(req, res)=>{
-  res.status(200).json({message:"server working"})
-})
+// Health check
+app.get("/healthCheck", (req, res) => {
+  res.status(200).json({ message: "Server is working ✅" });
+});
 
-connectDB().then(() =>{
+// Routes
+app.use("/", router);
+
+// DB Connection & Server Start
+connectDB().then(() => {
   const PORT = process.env.PORT || 8000;
-  app.on("error", (error) =>{
-    console.log("ERROR", error);
-    throw error
-  })
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
   });
-}).catch((error) =>{
-  console.error("MONGO db connection failed !!!" , error)
-})
+
+  app.on("error", (error) => {
+    console.error("❌ App error:", error);
+    process.exit(1);
+  });
+});
