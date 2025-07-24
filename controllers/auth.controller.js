@@ -119,11 +119,17 @@
 // module.exports = { login, registration, updateUser, deleteUser };
 
 
-const { User } = require("../models/User.model.js");
-const jwt = require("jsonwebtoken");
+// const { User } = require("../models/User.model.js");
+// const jwt = require("jsonwebtoken");
+
+// const { User } = require("../models/User.model.js");
+// const {User} = require("../models/User.model.js")
+import {User} from '../models/User.model.js';
+
+import jwt from "jsonwebtoken";
 
 const saltRounds = 10; // Used for password hashing (ensure this is consistent with crypto utils)
-const privateKey = process.env.JWT_SECRET || "ghkdfdkkhdkddkdk"; // Use environment variable for security
+const privateKey =  "ghkdfdkkhdkddkdk"; // Use environment variable for security
 
 // Login endpoint
 export const login = async (req, res) => {

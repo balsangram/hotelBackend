@@ -1,29 +1,33 @@
-const  mongoose  = require("mongoose");
+// User.model.js (ESM version)
 
-const userSchema = new mongoose.Schema({
-    Image:{
-        type: String
-    },
-    name:{
-        type: String ,
-        require: true
-    },
-    email :{
-        type: String,
-        require : true,
-        lowercase: true,
-        unique: true
-    },
-    password :{
-        type: String ,
-        require: [true , "password is required"]
-    },
-    role : {
-        type : Boolean,
-        default : false 
-    }
-} , {timestamps : true}
-)
+import mongoose from "mongoose";
 
-const User = mongoose.model("User",userSchema)
-module.exports = {User}
+const userSchema = new mongoose.Schema(
+  {
+    Image: {
+      type: String,
+    },
+    name: {
+      type: String,
+      required: true, // ✅ Fix spelling: "require" ➝ "required"
+    },
+    email: {
+      type: String,
+      required: true,
+      lowercase: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required"], // ✅ Fix spelling
+    },
+    role: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+
+const User = mongoose.model("User", userSchema);
+export { User }; // ✅ Use ESM export
