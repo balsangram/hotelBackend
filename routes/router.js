@@ -8,7 +8,7 @@ const {addbooking ,displaybooking ,updatebooking  ,deletebooking} = require("../
 // user 
 router.post("/login", login);
 router.post("/registration", registration);
-router.put("/updateUser/:id", updateUser);
+router.patch("/updateUser/:id", updateUser);
 router.delete("/deleteUser/:id", deleteUser);
 
 // hotels 
